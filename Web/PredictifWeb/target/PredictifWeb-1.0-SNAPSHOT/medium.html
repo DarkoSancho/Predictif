@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Page Mediums</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+    <h1>Liste des mediums</h1>
+    <ul id="liste-mediums"></ul>
+
+    <script>
+        $(document).ready(function() {
+            console.log("Appel AJAX");
+            $.ajax({
+                url: "./ActionServlet",
+                type: "POST",
+                data: { todo: "consulter-liste-medium" },
+                dataType: "json"
+            })
+            .done(function(response) {
+                let mediums = response.Mediums; // Structure correcte
+                let listeMediumsHtml = $('#liste-mediums'); // Correspond à l'id du tag dans lequel on stocke notre texte (ligne 10 de ce code)
+                listeMediumsHtml.empty();
+
+                for (const medium of mediums) {
+                    listeMediumsHtml.append(
+                        $('<li>')
+                            .attr("data-id", medium.id)
+                            .text("Dénomination : " + medium.denomination + 
+                                  " | Genre : " + medium.genre)
+                    );
+                }
+            })
+            .fail(function(error) {
+                $("#liste-mediums").text("ERREUR");
+            });
+        });
+    </script>
+</body>
+</html>

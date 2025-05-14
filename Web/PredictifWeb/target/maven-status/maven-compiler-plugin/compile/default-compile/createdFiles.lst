@@ -1,0 +1,5 @@
+web\controleur\ActionServlet.class
+web\modele\Action.class
+web\vue\Serialisation.class
+web\modele\ConsulterListeMediumsAction.class
+web\vue\ConsulterListeMediumsSerialisation.class

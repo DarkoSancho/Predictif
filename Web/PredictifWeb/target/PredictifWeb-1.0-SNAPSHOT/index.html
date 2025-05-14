@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PredictIF - Connexion</title>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+  <h1>Bienvenue sur PredictIF</h1>
+  <h2>Connexion</h2>
+  <table>
+    <tr>
+      <th><label for="champ-login">Identifiant</label></th>
+      <td><input type="text" id="login" size="20" /></td>
+    </tr>
+    <tr>
+      <th><label for="champ-password">Mot de passe</label></th>
+      <td><input type="password" id="password" /></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <button id="bouton-connexion">Connexion</button>
+      </td>
+    </tr>
+    <tr>
+      <td id="ligne-message" colspan="2"></td> 
+    </tr>
+  </table>
+  <script>
+        function connexion(){
+           console.log("Appel AJAX");
+            $.ajax({
+                url: "./ActionServlet",
+                type: "POST",
+                data: { todo: "connexion", 
+                    email: email,
+                    motdepasse: motdepasse},
+                dataType: "json"
+            })
+            .done(function(response) {
+                
+
+            })
+            .fail(function(error) {
+                $("#liste-mediums").text("ERREUR");
+            }); 
+        }
+        
+        $(document).ready(function(){
+            $("#bouton-connexion").on("click", function () {
+                connexion();
+            });
+        });
+    </script>
+</body>
+</html>
